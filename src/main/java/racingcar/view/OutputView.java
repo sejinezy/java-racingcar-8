@@ -10,7 +10,7 @@ public class OutputView {
     private static final String MARKER = "-";
     private static final String WINNER = "최종 우승자 : ";
 
-    public static void printResult(Map<String, Integer> result) {
+    public void printResult(Map<String, Integer> result) {
         for (Entry<String, Integer> entry : result.entrySet()) {
             System.out.println(entry.getKey() + " : " + MARKER.repeat(entry.getValue()));
         }
@@ -18,13 +18,13 @@ public class OutputView {
 
     }
 
-    public static void printResultPrefix() {
+    public void printResultPrefix() {
         System.out.println(RESULT_PREFIX);
     }
 
-    public static void printWinner(ArrayList<String> winnerNames) {
+    public void printWinner(ArrayList<String> winnerNames) {
         System.out.print(WINNER);
-        System.out.println(String.join(", ",winnerNames));
+        System.out.println(String.join(", ", winnerNames));
     }
 }
 
