@@ -2,6 +2,7 @@ package racingcar;
 
 
 import racingcar.service.DefaultPickRandomValue;
+import racingcar.service.GameEngine;
 import racingcar.service.PickRandomValue;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
