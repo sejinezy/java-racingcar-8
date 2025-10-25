@@ -1,10 +1,10 @@
 package racingcar.domain;
 
-public class Number {
+public class Attempts {
 
     private final int number;
 
-    public Number(String rawInput) {
+    public Attempts(String rawInput) {
         int parsedInt = parseInt(rawInput);
         validate(parsedInt);
         this.number = parsedInt;
@@ -12,17 +12,14 @@ public class Number {
 
     private static int parseInt(String number) {
         try {
-            return Integer.parseInt(number);
+            return Integer.parseInt(number.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정수 숫자만 가능합니다.");
         }
     }
 
     private static boolean isPositive(int number) {
-        if (number > 0) {
-            return true;
-        }
-        return false;
+        return number > 0;
     }
 
     private void validate(int number) {
