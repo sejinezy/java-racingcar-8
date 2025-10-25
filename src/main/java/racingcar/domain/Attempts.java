@@ -2,6 +2,9 @@ package racingcar.domain;
 
 public class Attempts {
 
+    private static final String ERR_NUMBER_INTEGER = "정수 숫자만 가능합니다.";
+    private static final String ERR_NUMBER_POSITIVE = "1 이상이어야 합니다.";
+
     private final int number;
 
     public Attempts(String numberInput) {
@@ -14,7 +17,7 @@ public class Attempts {
         try {
             return Integer.parseInt(numberInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수 숫자만 가능합니다.");
+            throw new IllegalArgumentException(ERR_NUMBER_INTEGER);
         }
     }
 
@@ -24,7 +27,7 @@ public class Attempts {
 
     private void validatePositive(int number) {
         if (!isPositive(number)) {
-            throw new IllegalArgumentException("1 이상이어야 합니다.");
+            throw new IllegalArgumentException(ERR_NUMBER_POSITIVE);
         }
     }
 
