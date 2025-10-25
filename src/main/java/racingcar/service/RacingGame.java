@@ -1,7 +1,6 @@
 package racingcar.service;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import racingcar.domain.Car;
 import racingcar.domain.ParticipatingCars;
@@ -9,38 +8,34 @@ import racingcar.domain.ParticipatingCars;
 public class RacingGame {
 
     private final ParticipatingCars participatingCars;
+    private final PickRandomValue pickRandomValue;
 
-    public RacingGame(ParticipatingCars participatingCars) {
+    public RacingGame(ParticipatingCars participatingCars, PickRandomValue pickRandomValue) {
         this.participatingCars = participatingCars;
+        this.pickRandomValue = pickRandomValue;
     }
 
-    public Map<String,Integer> runOneTime() {
+    public Map<String, Integer> runOneTime() {
         for (Car car : participatingCars.getCars()) {
             operate(car);
         }
-        return ResultOneTime();
+        return resultOneTime();
     }
 
-    private Map<String, Integer> ResultOneTime() {
-        Map<String, Integer> result = new HashMap<>();
-
+    private Map<String, Integer> resultOneTime() {
+        Map<String, Integer> gameResult = new LinkedHashMap<>();
         for (Car car : participatingCars.getCars()) {
-            result.put(car.getName(), car.getPosition());
+            gameResult.put(car.getName(), car.getPosition());
         }
-
-        return result;
+        return gameResult;
     }
 
     private void operate(Car car) {
-        int randomValue = pickRandomValue();
+        int randomValue = pickRandomValue.pick();
 
         if (randomValue >= 4) {
             car.moveForward();
         }
-    }
-
-    private int pickRandomValue() {
-        return Randoms.pickNumberInRange(0, 9);
     }
 
 
