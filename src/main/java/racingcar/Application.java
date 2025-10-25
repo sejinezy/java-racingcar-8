@@ -1,34 +1,20 @@
 package racingcar;
 
-import java.util.ArrayList;
-import racingcar.domain.Number;
-import racingcar.domain.ParticipatingCars;
-import racingcar.service.RacingGame;
+
+import racingcar.service.DefaultPickRandomValue;
+import racingcar.service.PickRandomValue;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
 
-
-        String carNamesInput = InputView.carNamesReadLine();
-        InputView.validateBlank(carNamesInput);
-
-        String numberInput = InputView.numberReadLine();
-        InputView.validateBlank(numberInput);
-        Number number = new Number(numberInput);
-
-        String[] parsed = InputView.parse(carNamesInput);
-
-        ParticipatingCars participatingCars = new ParticipatingCars(parsed);
-
-
-        RacingGame racingGame = new RacingGame(participatingCars);
+        InputView inputView = new InputView();
+        PickRandomValue pickRandomValue = new DefaultPickRandomValue();
         GameEngine gameEngine = new GameEngine();
-        gameEngine.runAll(number, racingGame);
-        ArrayList<String> winner = gameEngine.getWinner(participatingCars);
+        OutputView outputView = new OutputView();
 
-        OutputView.printWinner(winner);
-
+        GameController gameController = new GameController(inputView, pickRandomValue, gameEngine, outputView);
+        gameController.run();
     }
 }
