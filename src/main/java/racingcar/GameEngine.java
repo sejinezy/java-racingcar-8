@@ -1,33 +1,32 @@
 package racingcar;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
-import racingcar.domain.Car;
-import racingcar.domain.Number;
-import racingcar.domain.ParticipatingCars;
+import java.util.Map.Entry;
+import racingcar.domain.Attempts;
 import racingcar.service.RacingGame;
-import racingcar.view.OutputView;
 
 public class GameEngine {
 
-    public void runAll(Number number, RacingGame racingGame) {
-        OutputView.printResultPrefix();
-        for (int i = 0; i < number.getNumber(); i++) {
-            Map<String, Integer> stringIntegerMap = racingGame.runOneTime();
-            OutputView.printResult(stringIntegerMap);
+    public List<Map<String, Integer>> runAll(Attempts attempts, RacingGame racingGame) {
+        List<Map<String, Integer>> gameResults = new ArrayList<>();
+
+        for (int i = 0; i < attempts.getNumber(); i++) {
+            gameResults.add(racingGame.runOneTime());
         }
+        return gameResults;
     }
 
-    public ArrayList<String> getWinner(ParticipatingCars cars) {
+    public ArrayList<String> getWinner(Map<String, Integer> lastResult) {
         ArrayList<String> winnerNames = new ArrayList<>();
-        int maxPoint = Integer.MIN_VALUE;
-        for (Car car : cars.getCars()) {
-            if (car.getPosition() >= maxPoint) {
-                winnerNames.add(car.getName());
-                maxPoint = car.getPosition();
+        Integer maxPosition = Collections.max(lastResult.values());
+        for (Entry<String, Integer> entry : lastResult.entrySet()) {
+            if (entry.getValue().equals(maxPosition)) {
+                winnerNames.add(entry.getKey());
             }
         }
         return winnerNames;
     }
-
 }
