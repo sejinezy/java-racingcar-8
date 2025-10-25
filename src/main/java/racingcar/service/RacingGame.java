@@ -7,6 +7,8 @@ import racingcar.domain.ParticipatingCars;
 
 public class RacingGame {
 
+    private static final int MOVE_THRESHOLD = 4;
+
     private final ParticipatingCars participatingCars;
     private final PickRandomValue pickRandomValue;
 
@@ -24,6 +26,7 @@ public class RacingGame {
 
     private Map<String, Integer> resultOneTime() {
         Map<String, Integer> gameResult = new LinkedHashMap<>();
+
         for (Car car : participatingCars.getCars()) {
             gameResult.put(car.getName(), car.getPosition());
         }
@@ -31,9 +34,9 @@ public class RacingGame {
     }
 
     private void operate(Car car) {
-        int randomValue = pickRandomValue.pick();
+        int randomValue = pickRandomValue.pickRandomNumber();
 
-        if (randomValue >= 4) {
+        if (randomValue >= MOVE_THRESHOLD) {
             car.moveForward();
         }
     }
