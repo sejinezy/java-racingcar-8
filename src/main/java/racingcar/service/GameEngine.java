@@ -18,8 +18,8 @@ public class GameEngine {
         return gameResults;
     }
 
-    public ArrayList<String> getWinner(Map<String, Integer> lastResult) {
-        ArrayList<String> winnerNames = new ArrayList<>();
+    public List<String> getWinner(Map<String, Integer> lastResult) {
+        List<String> winnerNames = new ArrayList<>();
         Integer maxPosition = Collections.max(lastResult.values());
         for (Entry<String, Integer> entry : lastResult.entrySet()) {
             if (entry.getValue().equals(maxPosition)) {
