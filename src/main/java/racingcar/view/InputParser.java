@@ -5,10 +5,11 @@ import java.util.List;
 
 public class InputParser {
 
-    public static void validateBlank(String raw) {
+    public static String validateBlank(String raw) {
         if (raw == null || raw.isBlank()) {
             throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
         }
+        return raw.trim();
     }
 
     public static List<String> parseCarNames(String raw) {
@@ -16,8 +17,8 @@ public class InputParser {
         List<String> carNames = new ArrayList<>();
         String[] split = raw.split(",",-1);
         for (String carName : split) {
-            validateBlank(carName.trim());
-            carNames.add(carName.trim());
+            String validatedInput = validateBlank(carName);
+            carNames.add(validatedInput);
         }
         return carNames;
     }
