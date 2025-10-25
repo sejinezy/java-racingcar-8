@@ -1,6 +1,6 @@
 package racingcar.view;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -22,7 +22,7 @@ public class OutputView {
         System.out.println(RESULT_PREFIX);
     }
 
-    public void printWinner(ArrayList<String> winnerNames) {
+    public void printWinner(List<String> winnerNames) {
         System.out.print(WINNER);
         System.out.println(String.join(", ", winnerNames));
     }
