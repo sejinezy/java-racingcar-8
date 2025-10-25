@@ -2,5 +2,5 @@ package racingcar.service;
 
 public interface PickRandomValue {
 
-    int pick();
+    int pickRandomNumber();
 }
