@@ -8,25 +8,29 @@ import java.util.List;
 
 public class ParticipatingCars {
 
+    private static final String ERR_CARS_DUPLICATE_CAR_NAME = "동일한 이름의 자동차는 같은 게임에 참여할 수 없습니다.";
+    private static final String ERR_CARS_SIZE = "두 대 이상의 자동차가 참여해야 합니다.";
+    private static final int MIN_CARS_SIZE = 2;
+
     private final List<Car> cars = new ArrayList<>();
 
     public ParticipatingCars(List<String> cars) {
-        validateCars(cars);
-        validateSize(cars);
+        validateDuplicateCarName(cars);
+        validateCarsSize(cars);
         for (String car : cars) {
             this.cars.add(new Car(car));
         }
     }
 
-    private void validateCars(List<String> cars) {
+    private void validateDuplicateCarName(List<String> cars) {
         if (cars.size() != new HashSet<>(cars).size()) {
-            throw new IllegalArgumentException("한 게임의 자동차 이름은 모두 달라야 합니다.");
+            throw new IllegalArgumentException(ERR_CARS_DUPLICATE_CAR_NAME);
         }
     }
 
-    private void validateSize(List<String> cars) {
-        if (cars.size() < 2) {
-            throw new IllegalArgumentException("한 게임의 자동차는 2대 이상이어야 합니다.");
+    private void validateCarsSize(List<String> cars) {
+        if (cars.size() < MIN_CARS_SIZE) {
+            throw new IllegalArgumentException(ERR_CARS_SIZE);
         }
     }
 
