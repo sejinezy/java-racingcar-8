@@ -21,7 +21,7 @@ public class InputParser {
     public static List<String> parseCarNames(String raw) {
         validateBlank(raw);
         List<String> carNames = new ArrayList<>();
-        String[] split = raw.split(REGEX,-1);
+        String[] split = raw.split(REGEX, -1);
         for (String carName : split) {
             String validatedInput = validateBlank(carName);
             carNames.add(validatedInput);
