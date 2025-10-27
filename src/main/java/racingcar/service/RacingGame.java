@@ -24,15 +24,6 @@ public class RacingGame {
         return resultOneTime();
     }
 
-    private Map<String, Integer> resultOneTime() {
-        Map<String, Integer> gameResult = new LinkedHashMap<>();
-
-        for (Car car : participatingCars.getCars()) {
-            gameResult.put(car.getName(), car.getPosition());
-        }
-        return gameResult;
-    }
-
     private void operate(Car car) {
         int randomValue = pickRandomValue.pickRandomNumber();
 
@@ -41,5 +32,13 @@ public class RacingGame {
         }
     }
 
+    private Map<String, Integer> resultOneTime() {
+        Map<String, Integer> gameResult = new LinkedHashMap<>();
+
+        for (Car car : participatingCars.getCars()) {
+            gameResult.put(car.getName(), car.getPosition());
+        }
+        return gameResult;
+    }
 
 }
