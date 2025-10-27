@@ -4,38 +4,27 @@ import static racingcar.view.InputParser.*;
 
 import java.util.List;
 import java.util.Map;
-import racingcar.domain.Attempts;
-import racingcar.domain.ParticipatingCars;
-import racingcar.service.GameEngine;
-import racingcar.service.PickRandomValue;
-import racingcar.service.RacingGame;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class GameController {
 
     private final InputView inputView;
-    private final PickRandomValue pickRandomValue;
-    private final GameEngine gameEngine;
+    private final StartRacingUseCase startRacingUseCase;
     private final OutputView outputView;
 
-    public GameController(InputView inputView, PickRandomValue pickRandomValue, GameEngine gameEngine,
+    public GameController(InputView inputView, StartRacingUseCase startRacingUseCase,
                           OutputView outputView) {
         this.inputView = inputView;
-        this.pickRandomValue = pickRandomValue;
-        this.gameEngine = gameEngine;
+        this.startRacingUseCase = startRacingUseCase;
         this.outputView = outputView;
     }
 
     public void run() {
         List<String> carNames = parseValidatedCarNames(inputView.carNamesReadLine());
-        String numberInput = validateBlank(inputView.numberReadLine());
+        String attemptsInput = validateBlank(inputView.numberReadLine());
 
-        Attempts attempts = new Attempts(numberInput);
-        ParticipatingCars participatingCars = new ParticipatingCars(carNames);
-        RacingGame racingGame = new RacingGame(participatingCars, pickRandomValue);
-
-        List<Map<String, Integer>> allResult = gameEngine.runAll(attempts, racingGame);
+        List<Map<String, Integer>> allResult = startRacingUseCase.execute(carNames, attemptsInput);
 
         printGameResult(allResult);
         printWinners(allResult);
@@ -49,11 +38,8 @@ public class GameController {
     }
 
     private void printWinners(List<Map<String, Integer>> allResult) {
-        List<String> winner = getWinners(allResult);
+        List<String> winner = startRacingUseCase.extractWinners(allResult);
         outputView.printWinner(winner);
     }
 
-    private List<String> getWinners(List<Map<String, Integer>> allResult) {
-        return gameEngine.getWinner(allResult.getLast());
-    }
 }
