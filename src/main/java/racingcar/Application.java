@@ -14,8 +14,9 @@ public class Application {
         PickRandomValue pickRandomValue = new DefaultPickRandomValue();
         GameEngine gameEngine = new GameEngine();
         OutputView outputView = new OutputView();
+        StartRacingUseCase startRacingUseCase = new StartRacingUseCase(pickRandomValue, gameEngine);
 
-        GameController gameController = new GameController(inputView, pickRandomValue, gameEngine, outputView);
+        GameController gameController = new GameController(inputView, startRacingUseCase, outputView);
         gameController.run();
     }
 }
