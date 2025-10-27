@@ -15,20 +15,20 @@ public class ParticipatingCars {
     private final List<Car> cars = new ArrayList<>();
 
     public ParticipatingCars(List<String> cars) {
-        validateDuplicateCarName(cars);
-        validateCarsSize(cars);
+        validateUnique(cars);
+        validateSize(cars);
         for (String car : cars) {
             this.cars.add(new Car(car));
         }
     }
 
-    private void validateDuplicateCarName(List<String> cars) {
+    private void validateUnique(List<String> cars) {
         if (cars.size() != new HashSet<>(cars).size()) {
             throw new IllegalArgumentException(ERR_CARS_DUPLICATE_CAR_NAME);
         }
     }
 
-    private void validateCarsSize(List<String> cars) {
+    private void validateSize(List<String> cars) {
         if (cars.size() < MIN_CARS_SIZE) {
             throw new IllegalArgumentException(ERR_CARS_SIZE);
         }

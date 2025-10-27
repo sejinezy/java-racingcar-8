@@ -28,11 +28,11 @@ public class GameController {
     }
 
     public void run() {
-        List<String> parsedCarNames = parseCarNames(inputView.carNamesReadLine());
-        String validatedNumberInput = validateBlank(inputView.numberReadLine());
+        List<String> carNames = parseValidatedCarNames(inputView.carNamesReadLine());
+        String numberInput = validateBlank(inputView.numberReadLine());
 
-        Attempts attempts = new Attempts(validatedNumberInput);
-        ParticipatingCars participatingCars = new ParticipatingCars(parsedCarNames);
+        Attempts attempts = new Attempts(numberInput);
+        ParticipatingCars participatingCars = new ParticipatingCars(carNames);
         RacingGame racingGame = new RacingGame(participatingCars, pickRandomValue);
 
         List<Map<String, Integer>> allResult = gameEngine.runAll(attempts, racingGame);
