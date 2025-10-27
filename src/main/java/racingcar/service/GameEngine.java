@@ -21,12 +21,7 @@ public class GameEngine {
     public List<String> getWinner(RoundResult lastResult) {
         List<String> winnerNames = new ArrayList<>();
 
-        int maxPosition = 0;
-        for (CarPosition position : lastResult.positions()) {
-            if (position.position() > maxPosition) {
-                maxPosition = position.position();
-            }
-        }
+        int maxPosition = getMaxPosition(lastResult);
 
         for (CarPosition participatedCar : lastResult.positions()) {
             if (participatedCar.position() == maxPosition) {
@@ -34,5 +29,15 @@ public class GameEngine {
             }
         }
         return winnerNames;
+    }
+
+    private static int getMaxPosition(RoundResult lastResult) {
+        int maxPosition = 0;
+        for (CarPosition position : lastResult.positions()) {
+            if (position.position() > maxPosition) {
+                maxPosition = position.position();
+            }
+        }
+        return maxPosition;
     }
 }
