@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import racingcar.domain.Attempts;
+import racingcar.domain.RacingTurnRunner;
 
 public class GameEngine {
 
-    public List<Map<String, Integer>> runAll(Attempts attempts, RacingGame racingGame) {
+    public List<Map<String, Integer>> runAll(Attempts attempts, RacingTurnRunner racingGame) {
         List<Map<String, Integer>> gameResults = new ArrayList<>();
 
         for (int i = 0; i < attempts.getNumber(); i++) {

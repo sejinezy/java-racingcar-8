@@ -1,6 +1,7 @@
-package racingcar.service;
+package racingcar.infra.random;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.domain.port.PickRandomValue;
 
 public class DefaultPickRandomValue implements PickRandomValue {
 

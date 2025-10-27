@@ -1,18 +1,17 @@
-package racingcar.service;
+package racingcar.domain;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import racingcar.domain.Car;
-import racingcar.domain.ParticipatingCars;
+import racingcar.domain.port.PickRandomValue;
 
-public class RacingGame {
+public class RacingTurnRunner {
 
     private static final int MOVE_THRESHOLD = 4;
 
     private final ParticipatingCars participatingCars;
     private final PickRandomValue pickRandomValue;
 
-    public RacingGame(ParticipatingCars participatingCars, PickRandomValue pickRandomValue) {
+    public RacingTurnRunner(ParticipatingCars participatingCars, PickRandomValue pickRandomValue) {
         this.participatingCars = participatingCars;
         this.pickRandomValue = pickRandomValue;
     }

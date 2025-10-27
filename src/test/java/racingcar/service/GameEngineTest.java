@@ -8,6 +8,8 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.Attempts;
 import racingcar.domain.ParticipatingCars;
+import racingcar.domain.RacingTurnRunner;
+import racingcar.domain.port.PickRandomValue;
 
 class GameEngineTest {
 
@@ -30,7 +32,7 @@ class GameEngineTest {
         Attempts attempts = new Attempts("2");
         ParticipatingCars participatingCars = new ParticipatingCars(List.of("pobi", "woni"));
         PickRandomValue value = new AlwaysMovePicker();
-        RacingGame racingGame = new RacingGame(participatingCars, value);
+        RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars, value);
 
         GameEngine gameEngine = new GameEngine();
         List<Map<String, Integer>> gameResults = gameEngine.runAll(attempts, racingGame);
@@ -43,7 +45,7 @@ class GameEngineTest {
         Attempts attempts = new Attempts("2");
         ParticipatingCars participatingCars = new ParticipatingCars(List.of("pobi", "woni"));
         PickRandomValue value = new AlwaysMovePicker();
-        RacingGame racingGame = new RacingGame(participatingCars, value);
+        RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars, value);
 
         GameEngine gameEngine = new GameEngine();
         List<Map<String, Integer>> gameResults = gameEngine.runAll(attempts, racingGame);

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.ParticipatingCars;
+import racingcar.domain.RacingTurnRunner;
+import racingcar.domain.port.PickRandomValue;
 
 class RacingGameTest {
 
@@ -28,7 +30,7 @@ class RacingGameTest {
     void 랜덤값이_4_이상이면_전진한다() {
         ParticipatingCars participatingCars = new ParticipatingCars(List.of("pobi", "woni"));
         PickRandomValue value = new AlwaysMovePicker();
-        RacingGame racingGame = new RacingGame(participatingCars, value);
+        RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars, value);
 
         Map<String, Integer> oneTimeResult = racingGame.runOneTime();
         Map<String, Integer> exactedResult = Map.of("pobi", 1, "woni", 1);
@@ -39,7 +41,7 @@ class RacingGameTest {
     void 랜덤값이_4_미만이면_전진하지_않는다() {
         ParticipatingCars participatingCars = new ParticipatingCars(List.of("pobi", "woni"));
         PickRandomValue value = new NeverMovePicker();
-        RacingGame racingGame = new RacingGame(participatingCars, value);
+        RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars, value);
 
         Map<String, Integer> oneTimeResult = racingGame.runOneTime();
         Map<String, Integer> exactedResult = Map.of("pobi", 0, "woni", 0);
@@ -50,7 +52,7 @@ class RacingGameTest {
     void 각각의_결과지는_다음턴에_영향받지_않는다() {
         ParticipatingCars participatingCars = new ParticipatingCars(List.of("pobi", "woni"));
         PickRandomValue value = new AlwaysMovePicker();
-        RacingGame racingGame = new RacingGame(participatingCars, value);
+        RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars, value);
 
         Map<String, Integer> oneTimeResult = racingGame.runOneTime();
         Map<String, Integer> twoTimeResult = racingGame.runOneTime();
@@ -63,7 +65,7 @@ class RacingGameTest {
     void 결과지는_참가하는_자동차의_순서를_보장한다() {
         ParticipatingCars participatingCars = new ParticipatingCars(List.of("pobi", "woni"));
         PickRandomValue value = new AlwaysMovePicker();
-        RacingGame racingGame = new RacingGame(participatingCars, value);
+        RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars, value);
 
         Map<String, Integer> oneTimeResult = racingGame.runOneTime();
 

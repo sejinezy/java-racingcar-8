@@ -5,8 +5,8 @@ import java.util.Map;
 import racingcar.domain.Attempts;
 import racingcar.domain.ParticipatingCars;
 import racingcar.service.GameEngine;
-import racingcar.service.PickRandomValue;
-import racingcar.service.RacingGame;
+import racingcar.domain.port.PickRandomValue;
+import racingcar.domain.RacingTurnRunner;
 
 public class StartRacingUseCase {
 
@@ -20,7 +20,7 @@ public class StartRacingUseCase {
 
     public List<Map<String, Integer>> execute(List<String> carNames, String attemptsInput) {
         ParticipatingCars participatingCars = new ParticipatingCars(carNames);
-        RacingGame racingGame = new RacingGame(participatingCars,pickRandomValue);
+        RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars,pickRandomValue);
         Attempts attempts = new Attempts(attemptsInput);
 
         return gameEngine.runAll(attempts, racingGame);
