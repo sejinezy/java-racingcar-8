@@ -12,16 +12,25 @@ public class InputParser {
     }
 
     public static String validateBlank(String raw) {
-        if (raw == null || raw.isBlank()) {
+        if (isBlank(raw)) {
             throw new IllegalArgumentException(ERR_IS_BLANK);
         }
         return raw.trim();
     }
 
-    public static List<String> parseCarNames(String raw) {
+    private static boolean isBlank(String raw) {
+        return raw == null || raw.isBlank();
+    }
+
+    private static String[] splitByComma(String raw) {
+        return raw.split(REGEX, -1);
+    }
+
+    public static List<String> parseValidatedCarNames(String raw) {
         validateBlank(raw);
         List<String> carNames = new ArrayList<>();
-        String[] split = raw.split(REGEX, -1);
+
+        String[] split = splitByComma(raw);
         for (String carName : split) {
             String validatedInput = validateBlank(carName);
             carNames.add(validatedInput);
