@@ -1,8 +1,8 @@
 package racingcar.view;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import racingcar.domain.CarPosition;
+import racingcar.application.dto.RoundResult;
 
 public class OutputView {
 
@@ -12,9 +12,10 @@ public class OutputView {
     private static final String RESULT_ENTRY_DELIMITER = " : ";
     private static final String WINNER_DELIMITER = ", ";
 
-    public void printResult(Map<String, Integer> result) {
-        for (Entry<String, Integer> entry : result.entrySet()) {
-            System.out.println(entry.getKey() + RESULT_ENTRY_DELIMITER + CAR_POSITION_MARKER.repeat(entry.getValue()));
+    public void printResult(RoundResult result) {
+
+        for (CarPosition participatedCar : result.positions()) {
+            System.out.println(participatedCar.name() + RESULT_ENTRY_DELIMITER + CAR_POSITION_MARKER.repeat(participatedCar.position()));
         }
         System.out.println();
 

@@ -1,7 +1,8 @@
 package racingcar.domain;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import racingcar.application.dto.RoundResult;
 import racingcar.domain.port.PickRandomValue;
 
 public class RacingTurnRunner {
@@ -16,7 +17,7 @@ public class RacingTurnRunner {
         this.pickRandomValue = pickRandomValue;
     }
 
-    public Map<String, Integer> runOneTime() {
+    public RoundResult runOneTime() {
         for (Car car : participatingCars.getCars()) {
             operate(car);
         }
@@ -31,13 +32,14 @@ public class RacingTurnRunner {
         }
     }
 
-    private Map<String, Integer> resultOneTime() {
-        Map<String, Integer> gameResult = new LinkedHashMap<>();
+    private RoundResult resultOneTime() {
+        List<CarPosition> gameResult = new ArrayList<>();
 
         for (Car car : participatingCars.getCars()) {
-            gameResult.put(car.getName(), car.getPosition());
+            CarPosition carPosition = new CarPosition(car.getName(), car.getPosition());
+            gameResult.add(carPosition);
         }
-        return gameResult;
+        return new RoundResult(gameResult);
     }
 
 }

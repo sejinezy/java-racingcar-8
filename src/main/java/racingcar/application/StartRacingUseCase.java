@@ -1,7 +1,7 @@
-package racingcar;
+package racingcar.application;
 
 import java.util.List;
-import java.util.Map;
+import racingcar.application.dto.RoundResult;
 import racingcar.domain.Attempts;
 import racingcar.domain.ParticipatingCars;
 import racingcar.service.GameEngine;
@@ -18,7 +18,7 @@ public class StartRacingUseCase {
         this.gameEngine = gameEngine;
     }
 
-    public List<Map<String, Integer>> execute(List<String> carNames, String attemptsInput) {
+    public List<RoundResult> execute(List<String> carNames, String attemptsInput) {
         ParticipatingCars participatingCars = new ParticipatingCars(carNames);
         RacingTurnRunner racingGame = new RacingTurnRunner(participatingCars,pickRandomValue);
         Attempts attempts = new Attempts(attemptsInput);
@@ -26,7 +26,7 @@ public class StartRacingUseCase {
         return gameEngine.runAll(attempts, racingGame);
     }
 
-    public List<String> extractWinners(List<Map<String, Integer>> allResult) {
+    public List<String> extractWinners(List<RoundResult> allResult) {
         return gameEngine.getWinner(allResult.getLast());
 
     }

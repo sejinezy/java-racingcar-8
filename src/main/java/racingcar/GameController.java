@@ -3,7 +3,8 @@ package racingcar;
 import static racingcar.view.InputParser.*;
 
 import java.util.List;
-import java.util.Map;
+import racingcar.application.StartRacingUseCase;
+import racingcar.application.dto.RoundResult;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -24,20 +25,20 @@ public class GameController {
         List<String> carNames = parseValidatedCarNames(inputView.carNamesReadLine());
         String attemptsInput = validateBlank(inputView.numberReadLine());
 
-        List<Map<String, Integer>> allResult = startRacingUseCase.execute(carNames, attemptsInput);
+        List<RoundResult> allResult = startRacingUseCase.execute(carNames, attemptsInput);
 
         printGameResult(allResult);
         printWinners(allResult);
     }
 
-    private void printGameResult(List<Map<String, Integer>> allResult) {
+    private void printGameResult(List<RoundResult> allResult) {
         outputView.printResultPrefix();
-        for (Map<String, Integer> onetimeResult : allResult) {
+        for (RoundResult onetimeResult : allResult) {
             outputView.printResult(onetimeResult);
         }
     }
 
-    private void printWinners(List<Map<String, Integer>> allResult) {
+    private void printWinners(List<RoundResult> allResult) {
         List<String> winner = startRacingUseCase.extractWinners(allResult);
         outputView.printWinner(winner);
     }
